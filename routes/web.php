@@ -550,9 +550,12 @@ Route::post('/verify', ['as' => 'verify','uses'=>'CommonController@update_verify
 /* shop */
 
 Route::get('/shop', 'CommonController@view_all_items')->middleware('cacheable:5');
+Route::get('/shop/{user}', 'CommonController@User_Shop')->middleware('cacheable:5');
+
 Route::post('/shop', ['as' => 'shop','uses'=>'CommonController@view_shop_items'])->middleware('cacheable:5');
 Route::get('/shop/{type}/{slug}', 'CommonController@view_category_types')->middleware('cacheable:5');
 Route::get('/upgrade-bank-details', 'CommonController@upgrade_bank_details');
+
 /* shop */
 
 
@@ -727,6 +730,15 @@ Route::post('/purchases', ['as' => 'purchases','uses'=>'ItemController@rating_pu
 Route::get('/invoice/{product_token}/{order_id}', 'ItemController@invoice_download');
 Route::get('/download/{token}', 'ItemController@file_download');
 /* purchases */
+
+
+
+/* Custom Domains */
+
+Route::get('/custom-domain', 'ItemController@custom_domain');
+
+/* Custom Domains */
+
 
 /* sales */
 

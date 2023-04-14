@@ -84,6 +84,11 @@ class ItemController extends Controller
     
 	}
 	
+
+	public function custom_domain()
+	{
+		return view('custom-domain');
+	}
 	
 	public static function Image_Path($image_name,$empty_name) 
     {

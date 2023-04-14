@@ -105,20 +105,20 @@ class RegisterController extends Controller
 		 }
 		 
 		
-		if($additional_settings->site_google_recaptcha == 1)
-		{
-			$request->validate([
-								'name' => 'required',
-								'username' => 'required',
-								'email' => 'required|email',
-								'password' => ['required', 'min:6'],
-								'g-recaptcha-response' => 'required|captcha',
+		// if($additional_settings->site_google_recaptcha == 1)
+		// {
+		// 	$request->validate([
+		// 						'name' => 'required',
+		// 						'username' => 'required',
+		// 						'email' => 'required|email',
+		// 						'password' => ['required', 'min:6'],
+		// 						'g-recaptcha-response' => 'required|captcha',
 								
 								
-			 ]);
-		 }
-		 else
-		 {
+		// 	 ]);
+		//  }
+		//  else
+		//  {
 		    $request->validate([
 								'name' => 'required',
 								'username' => 'required',
@@ -128,7 +128,7 @@ class RegisterController extends Controller
 								
 								
 			 ]);
-		 }
+		//  }
 		 $rules = array(
 				'username' => ['required', 'regex:/^[\w-]*$/', 'max:255', Rule::unique('users') -> where(function($sql){ $sql->where('drop_status','=','no');})],
 				'email' => ['required', 'email', 'max:255', Rule::unique('users') -> where(function($sql){ $sql->where('drop_status','=','no');})],
@@ -237,7 +237,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
 			'username' => ['required', 'regex:/^[\w-]*$/', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
-			'g-recaptcha-response' => 'required|captcha',
+			// 'g-recaptcha-response' => 'required|captcha',
         ]);
     }
 
@@ -299,84 +299,84 @@ class RegisterController extends Controller
 		 $subscr_date = date('Y-m-d', strtotime($subscr_value));
 		 $days_ago = date('Y-m-d', strtotime('-3 days'));
 
-		if($additional_settings->site_google_recaptcha == 1)
-		{
-		   if($additional_settings->subscription_mode == 1)
-		   {
-			   if($user_type == 'vendor')
-			   {
-			      if($additional_settings->free_subscription == 1)
-			      {
-					return User::create([
-						'name' => $data['name'],
-						'email' => $data['email'],
-						'username' => $data['username'],
-						'password' => Hash::make($data['password']),
-						'user_auth_token' => base64_encode($data['password']),
-						'user_token' => $token,
-						'earnings' => 0,
-						'user_type' => $encrypter->decrypt($data['user_type']),
-						'referral_by' => $referral_by, 
-						'referral_payout' => $referral_payout,
-						'g-recaptcha-response' => 'required|captcha',
-						'user_subscr_type' => $free_subscr_type, 
-						'user_subscr_price' => $free_subscr_price, 
-						'user_subscr_date' => $subscr_date, 
-						'user_subscr_item_level' => $user_subscr_item_level, 
-						'user_subscr_item' => $free_subscr_item,
-						'user_subscr_download_item' => $free_subscr_download_item, 
-						'user_subscr_space_level' => $user_subscr_space_level, 
-						'user_subscr_space' => $free_subscr_space, 
-						'user_subscr_space_type' => $user_subscr_space_type,  
-					]);
-				  }
-				  else
-				  {
-				      return User::create([
-						'name' => $data['name'],
-						'email' => $data['email'],
-						'username' => $data['username'],
-						'password' => Hash::make($data['password']),
-						'user_auth_token' => base64_encode($data['password']),
-						'user_token' => $token,
-						'earnings' => 0,
-						'user_type' => $encrypter->decrypt($data['user_type']),
-						'referral_by' => $referral_by, 
-						'referral_payout' => $referral_payout,
-						'g-recaptcha-response' => 'required|captcha',
-						'user_subscr_type' => $free_subscr_type, 
-						'user_subscr_price' => $free_subscr_price, 
-						'user_subscr_date' => $days_ago, 
-						'user_subscr_item_level' => $user_subscr_item_level, 
-						'user_subscr_item' => 0, 
-						'user_subscr_download_item' => $free_subscr_download_item,
-						'user_subscr_space_level' => $user_subscr_space_level, 
-						'user_subscr_space' => 0, 
-						'user_subscr_space_type' => $user_subscr_space_type,  
-					]);
-				  }	// free subscription closed
-			   } // vendor closed
-		   }// subscription closed	   
-		   else
-		   {
-		       return User::create([
-				'name' => $data['name'],
-				'email' => $data['email'],
-				'username' => $data['username'],
-				'password' => Hash::make($data['password']),
-				'user_auth_token' => base64_encode($data['password']),
-				'user_token' => $token,
-				'earnings' => 0,
-				'user_type' => $encrypter->decrypt($data['user_type']),
-				'referral_by' => $referral_by, 
-				'referral_payout' => $referral_payout,
-				'g-recaptcha-response' => 'required|captcha',
-				'user_subscr_download_item' => 1000,
-				]);
-		   }
-		}
-		else
-		{
+		// if($additional_settings->site_google_recaptcha == 1)
+		// {
+		//    if($additional_settings->subscription_mode == 1)
+		//    {
+		// 	   if($user_type == 'vendor')
+		// 	   {
+		// 	      if($additional_settings->free_subscription == 1)
+		// 	      {
+		// 			return User::create([
+		// 				'name' => $data['name'],
+		// 				'email' => $data['email'],
+		// 				'username' => $data['username'],
+		// 				'password' => Hash::make($data['password']),
+		// 				'user_auth_token' => base64_encode($data['password']),
+		// 				'user_token' => $token,
+		// 				'earnings' => 0,
+		// 				'user_type' => $encrypter->decrypt($data['user_type']),
+		// 				'referral_by' => $referral_by, 
+		// 				'referral_payout' => $referral_payout,
+		// 				// 'g-recaptcha-response' => 'required|captcha',
+		// 				'user_subscr_type' => $free_subscr_type, 
+		// 				'user_subscr_price' => $free_subscr_price, 
+		// 				'user_subscr_date' => $subscr_date, 
+		// 				'user_subscr_item_level' => $user_subscr_item_level, 
+		// 				'user_subscr_item' => $free_subscr_item,
+		// 				'user_subscr_download_item' => $free_subscr_download_item, 
+		// 				'user_subscr_space_level' => $user_subscr_space_level, 
+		// 				'user_subscr_space' => $free_subscr_space, 
+		// 				'user_subscr_space_type' => $user_subscr_space_type,  
+		// 			]);
+		// 		  }
+		// 		  else
+		// 		  {
+		// 		      return User::create([
+		// 				'name' => $data['name'],
+		// 				'email' => $data['email'],
+		// 				'username' => $data['username'],
+		// 				'password' => Hash::make($data['password']),
+		// 				'user_auth_token' => base64_encode($data['password']),
+		// 				'user_token' => $token,
+		// 				'earnings' => 0,
+		// 				'user_type' => $encrypter->decrypt($data['user_type']),
+		// 				'referral_by' => $referral_by, 
+		// 				'referral_payout' => $referral_payout,
+		// 				// 'g-recaptcha-response' => 'required|captcha',
+		// 				'user_subscr_type' => $free_subscr_type, 
+		// 				'user_subscr_price' => $free_subscr_price, 
+		// 				'user_subscr_date' => $days_ago, 
+		// 				'user_subscr_item_level' => $user_subscr_item_level, 
+		// 				'user_subscr_item' => 0, 
+		// 				'user_subscr_download_item' => $free_subscr_download_item,
+		// 				'user_subscr_space_level' => $user_subscr_space_level, 
+		// 				'user_subscr_space' => 0, 
+		// 				'user_subscr_space_type' => $user_subscr_space_type,  
+		// 			]);
+		// 		  }	// free subscription closed
+		// 	   } // vendor closed
+		//    }// subscription closed	   
+		//    else
+		//    {
+		//        return User::create([
+		// 		'name' => $data['name'],
+		// 		'email' => $data['email'],
+		// 		'username' => $data['username'],
+		// 		'password' => Hash::make($data['password']),
+		// 		'user_auth_token' => base64_encode($data['password']),
+		// 		'user_token' => $token,
+		// 		'earnings' => 0,
+		// 		'user_type' => $encrypter->decrypt($data['user_type']),
+		// 		'referral_by' => $referral_by, 
+		// 		'referral_payout' => $referral_payout,
+		// 		// 'g-recaptcha-response' => 'required|captcha',
+		// 		'user_subscr_download_item' => 1000,
+		// 		]);
+		//    }
+		// }
+		// else
+		// {
 		   if($additional_settings->subscription_mode == 1)
 		   {
 			   if($user_type == 'vendor')
@@ -449,7 +449,7 @@ class RegisterController extends Controller
 				]);
 			}
 			
-		}	
+		// }	
 		
 		
     }
