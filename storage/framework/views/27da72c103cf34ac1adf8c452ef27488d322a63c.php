@@ -159,7 +159,7 @@ unset($__errorArgs, $__bag); ?>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <?php if($additional->site_google_recaptcha == 1): ?>
+                                    <?php if($additional->site_google_recaptcha == 1): ?>
                                     <div class="col-sm-12">
                                         <div
                                             class="form-group<?php echo e($errors->has('g-recaptcha-response') ? ' has-error' : ''); ?>">
@@ -174,7 +174,7 @@ unset($__errorArgs, $__bag); ?>
                                             <?php endif; ?>
                                         </div>
                                     </div>
-                                    <?php endif; ?> -->
+                                    <?php endif; ?>
                                     <div class="col-12">
                                         <div class="d-flex flex-wrap justify-content-between align-items-center">
                                             <div class="custom-checkbox d-block">
