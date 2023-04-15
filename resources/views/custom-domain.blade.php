@@ -23,14 +23,14 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb flex-lg-nowrap justify-content-center justify-content-lg-star">
                             <li class="breadcrumb-item"><a class="text-nowrap" href="{{ URL::to('/') }}"><i
-                                        class="dwg-home"></i>{{ __('Sales') }}</a></li>
-                            <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ __('Sales') }}</li>
+                                        class="dwg-home"></i>Custom Domains</a></li>
+                            <li class="breadcrumb-item text-nowrap active" aria-current="page">Custom Domains</li>
                             </li>
                         </ol>
                     </nav>
                 </div>
                 <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
-                    <h1 class="h3 mb-0 text-white">{{ __('Sales') }}</h1>
+                    <h1 class="h3 mb-0 text-white">Custom Domains</h1>
                 </div>
             </div>
         </div>

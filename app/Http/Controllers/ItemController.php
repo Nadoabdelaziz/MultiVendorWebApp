@@ -90,6 +90,13 @@ class ItemController extends Controller
 		return view('custom-domain');
 	}
 	
+
+	public function help()
+	{
+		return view('help');
+	}
+
+
 	public static function Image_Path($image_name,$empty_name) 
     {
 	  

@@ -733,6 +733,13 @@ Route::get('/download/{token}', 'ItemController@file_download');
 
 
 
+/* Help */
+
+Route::get('/help', 'ItemController@help');
+
+/* Help */
+
+
 /* Custom Domains */
 
 Route::get('/custom-domain', 'ItemController@custom_domain');
