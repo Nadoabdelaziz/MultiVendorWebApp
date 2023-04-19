@@ -735,6 +735,17 @@ Route::get('/download/{token}', 'ItemController@file_download');
 
 /* Help */
 
+// Route::get('/dog', 'ItemController@dog');
+
+Route::get("/dog", function(){
+	return View::make("dog");
+ });
+
+/* Help */
+
+
+/* Help */
+
 Route::get('/help', 'ItemController@help');
 
 /* Help */
