@@ -106,7 +106,7 @@ class RegisterController extends Controller
 		 
 		
 		if($additional_settings->site_google_recaptcha == 1)
-		{
+		{	
 
 			$request->validate([
 								'name' => 'required',
@@ -145,18 +145,22 @@ class RegisterController extends Controller
 
 		if ($validator->fails()) 
 		{
+			//here1");
+
 		 $failedRules = $validator->failed();
 		 return back()->withErrors($validator);
 		} 
 		else
 		{
-		
+
 		  if($allsettings->email_verification == 1)
 		  {
+
 		  $verified = 0;
 		  }
 		  else
 		  {
+			//here3");
 		  $verified = 1;
 		  }
 		  $user_token = $this->generateRandomString();
@@ -166,8 +170,12 @@ class RegisterController extends Controller
 		{  
 			if($user_type == 'vendor')
 			{ 
+				//here4");
+
 			  if($additional_settings->free_subscription == 1)
 			  {
+				//here5");
+
 			
 				$data = array('name' => $name, 'username' => $username, 'email' => $email, 'user_type' => $user_type, 'password' => $password, 'earnings' => $earnings, 'verified' => $verified, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s'), 'user_token' => $user_token, 'referral_by' => $referral_by, 'referral_payout' => $referral_payout, 'user_subscr_type' => $free_subscr_type, 'user_subscr_price' => $free_subscr_price, 'user_subscr_date' => $subscr_date, 'user_subscr_item_level' => $user_subscr_item_level, 'user_subscr_item' => $free_subscr_item, 'user_subscr_download_item' => $free_subscr_download_item,  'user_subscr_space_level' => $user_subscr_space_level, 'user_subscr_space' => $free_subscr_space, 'user_subscr_space_type' => $user_subscr_space_type, 'user_auth_token' => $user_auth_token, 'register_url' => $register_url);
 			  }
@@ -187,6 +195,8 @@ class RegisterController extends Controller
 			$data = array('name' => $name, 'username' => $username, 'email' => $email, 'user_type' => $user_type, 'password' => $password, 'earnings' => $earnings, 'verified' => $verified, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s'), 'user_token' => $user_token, 'referral_by' => $referral_by, 'referral_payout' => $referral_payout, 'user_auth_token' => $user_auth_token, 'register_url' => $register_url, 'user_subscr_download_item' => 1000);
 		}
 		Members::insertData($data);
+		//herebwa");
+
 		if($allsettings->email_verification == 1)
 		{
 		$sid = 1;
@@ -213,7 +223,7 @@ class RegisterController extends Controller
 			// 	dd($message);
 			//   }
 			//   else{
-			// 	dd("msg not found");
+			// 	//msg not found");
 			//   }
 			//   $aalldata = array(
 			// 	"data" => $data,

@@ -1,4 +1,4 @@
-<header class="bg-light box-shadow-sm navbar-sticky">
+<header class="bg-light box-shadow-sm">
     <!-- Topbar-->
     @if($allsettings->site_header_top_bar == 1)
     <div class="topbar" style="background-color:#3a4a4e">
@@ -80,13 +80,15 @@
             <div style="margin:auto"
                 class="topbar-text text-nowrap d-none d-md-inline-block border-left border-light pl-3 ml-3">
                 <span style="color:#a7abab;font-family: cursive;" class="nowrap">Welcome to</span>
-                <span style="font-family: cursive;color: #75cf63;" class="nowrap">OwnStore.cc</span>
+                <span style="font-family: cursive;color: #75cf63;" class="nowrap"><a
+                        style="font-family: cursive;color: #75cf63;" href="{{ URL::to('/') }}">OwnStore.cc</a></span>
 
             </div>
             <div style="margin:auto"
                 class="topbar-text text-nowrap d-none d-md-inline-block border-left border-light pl-3 ml-3">
                 <span style="color:#a7abab;font-family: cursive;" class="nowrap">Please get</span>
-                <span style="font-family: cursive;color: #75cf63;" class="nowrap">Pro</span>
+                <span style="font-family: cursive;color: #75cf63;" class="nowrap"><a style="color: #75cf63;"
+                        href="{{ URL::to('/subscription') }}">Pro </a></span>
                 <span style="color:#a7abab;font-family: cursive;" class="nowrap">for Complete Access</span>
 
 
@@ -122,21 +124,21 @@
 
         <div class="d-none d-md-block ml-3 text-nowrap" style="    margin-right: 17px;">
             <a style="font-family: cursive !important;color: #75cf63;"
-                class="topbar-link ml-3 pl-3 d-none d-md-inline-block" href="http://localhost/fickrr/verify">FREE
+                class="topbar-link ml-3 pl-3 d-none d-md-inline-block" href="{{ URL::to('/register') }}">FREE
                 ACCOUNT</a>
             <a style="font-family: cursive !important;color: #75cf63;"
                 class="topbar-link ml-3 pl-3 border-left border-light d-none d-md-inline-block"
-                href="http://localhost/fickrr/start-selling">CREATE PRO ACCOUNT</a>
+                href="{{ URL::to('/register') }}">CREATE PRO ACCOUNT</a>
             <a style="color:#a7abab;font-family: cursive !important"
                 class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block"
-                href="http://localhost/fickrr/subscription">LOGIN</a>
+                href="{{ URL::to('/login') }}">LOGIN</a>
         </div>
 
     </div>
     </div>
     @endif
     <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
-    <div class="navbar-sticky">
+    <div class="">
         <div style="padding: inherit;background-color: #313d3e !important;"
             class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container" style="padding: inherit;background: #313c3f;">
