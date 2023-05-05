@@ -25,7 +25,7 @@
       </div>
       </div>
     </section>
-<?php /*?><section class="bg-position-center-top" style="background-image: url('{{ url('/') }}/public/storage/settings/{{ $allsettings->site_banner }}');">
+<?php /*?><section class="bg-position-center-top" style="background-color: #3a4a4e;">
       <div class="container d-flex flex-column">
         <div class="row mt-auto">
         <div class="col-lg-8 col-sm-12 text-center mx-auto">

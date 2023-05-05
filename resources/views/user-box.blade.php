@@ -1,4 +1,4 @@
-<div class="page-title-overlap pt-4" style="background-image: url('{{ url('/') }}/public/storage/settings/{{ $allsettings->site_banner }}');">
+<div class="page-title-overlap pt-4" style="background-color: #3a4a4e;">
       <div class="container d-flex flex-wrap flex-sm-nowrap justify-content-center justify-content-sm-between align-items-center pt-2">
         <div class="media media-ie-fix align-items-center pb-3">
           <div class="img-thumbnail rounded-circle position-relative">

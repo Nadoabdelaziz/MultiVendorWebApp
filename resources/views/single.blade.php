@@ -20,7 +20,7 @@
 <body>
 @include('header')
 @if($allsettings->site_blog_display == 1)
-<section class="bg-position-center-top" style="background-image: url('{{ url('/') }}/public/storage/settings/{{ $allsettings->site_banner }}');">
+<section class="bg-position-center-top" style="background-color: #3a4a4e;">
       <div class="py-4">
         <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
         <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">

@@ -16,25 +16,23 @@
                 <ul class="navbar-nav" style="">
                     <li class="nav-item dropdown d-none d-md-block">
                         <a style="font-size: large;color: darkgray;font-family: cursive !important;"
-                            class="nav-link dropdown-toggle" href="{{ url('/') }}">HOME</a>
+                            class="nav-link dropdown-toggle" href="{{ url('/') }}">{{__('HOME')}}</a>
                     </li>
                     <li class="nav-item dropdown d-none d-md-block"><a
                             style="font-size: large;color: darkgray;font-family: cursive !important;"
-                            class="nav-link dropdown-toggle" href="{{ url('/register') }}">BECOME
-                            A SELLER</a>
+                            class="nav-link dropdown-toggle" href="{{ url('/register') }}">{{__('BECOME A SELLER')}}</a>
                     </li>
                     <li class="nav-item dropdown d-none d-md-block"><a
                             style="font-size: large;color: darkgray;font-family: cursive !important;"
-                            class="nav-link dropdown-toggle" href="{{ url('/') }}">PROTECT
-                            DOGS ACTION</a>
+                            class="nav-link dropdown-toggle" href="{{ url('/') }}">{{__('PROTECT DOGS ACTION')}}</a>
                     </li>
                     <li class="nav-item dropdown d-none d-md-block"><a
                             style="font-size: large;color: darkgray;font-family: cursive !important;"
-                            class="nav-link dropdown-toggle" href="{{ url('/') }}">FEES</a>
+                            class="nav-link dropdown-toggle" href="{{ url('/') }}">{{__('FEES')}}</a>
                     </li>
                     <li class="nav-item dropdown d-none d-md-block"><a
                             style="font-size: large;color: darkgray;font-family: cursive !important;"
-                            class="nav-link dropdown-toggle" href="{{ url('/') }}">SUPPORTED PAYMENTS</a>
+                            class="nav-link dropdown-toggle" href="{{ url('/') }}">{{__('SUPPORTED PAYMENTS')}}</a>
 
                     </li>
                 </ul>
@@ -59,17 +57,24 @@
         <section class="container mb-lg-1" data-aos="fade-up" data-aos-delay="200">
             <!-- Heading-->
             <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
-                <h2 class="h3 mb-0 pt-3 mr-2" data-aos="fade-down" data-aos-delay="100">{{ __('Featured Files') }}</h2>
-                <div class="pt-3" data-aos="fade-down" data-aos-delay="100">
+                <!-- <h2 class="h3 mb-0 pt-3 mr-2" data-aos="fade-down" data-aos-delay="100">{{ __('Featured Files') }}</h2> -->
+                <!-- <div class="pt-3" data-aos="fade-down" data-aos-delay="100">
                     <a class="btn btn-outline-accent"
                         href="{{ URL::to('/') }}/featured-items">{{ __('Browse All Items') }}<i
                             class="dwg-arrow-right font-size-ms ml-1"></i></a>
-                </div>
+                </div> -->
             </div>
 
-            <div style="    background-size: cover;
-height: 110px;background-image: url('http://localhost/fickrr/public/d_images/index_41.png');"
-                class="d-flex flex-wrap justify-content-between align-items-center">
+            <div style="justify-content: center;background-size: cover;height: 110px;background-image: url('http://localhost/fickrr/public/d_images/index_41.png');"
+                class="d-flex flex-wrap align-items-center"><a style="margin-top: -32px;color: white;"
+                    class="dwg-arrow-left font-size-m ml-1" href="{{ URL::to('/language') }}/gr"></a>
+
+
+                <span style=" margin-top: -25px;color: green;margin-left: 238px;margin-right: -7px;" class=""></span>
+                <!-- <span style="margin-top: -32px;color: white;" class="dwg-arrow-right font-size-m ml-1"></span> -->
+
+                <a style="margin-top: -32px;color: white;" class="dwg-arrow-right font-size-m ml-1"
+                    href="{{ URL::to('/language') }}/en"></a>
             </div>
 
             <!-- Grid-->
@@ -455,14 +460,14 @@ height: 110px;background-image: url('http://localhost/fickrr/public/d_images/ind
     width: 1216px;
     margin-left: 28px;" class="container mb-lg-1 flash-sale" data-aos="fade-up" data-aos-delay="200">
             <!-- Heading-->
-            <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
+            <!-- <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
                 <h2 class="h3 mb-0 pt-3 mr-2" data-aos="fade-down" data-aos-delay="100">{{ __('Free Items') }}</h2>
                 <div class="pt-3" data-aos="fade-down" data-aos-delay="100">
                     <a class="btn btn-outline-accent"
                         href="{{ URL::to('/') }}/free-items">{{ __('Browse All Items') }}<i
                             class="dwg-arrow-right font-size-ms ml-1"></i></a>
                 </div>
-            </div>
+            </div> -->
             <!-- Grid-->
             <div class="row pt-2 mx-n2">
                 <!-- Product-->

@@ -79,17 +79,18 @@
         <div class="container">
             <div style="margin:auto"
                 class="topbar-text text-nowrap d-none d-md-inline-block border-left border-light pl-3 ml-3">
-                <span style="color:#a7abab;font-family: cursive;" class="nowrap">Welcome to</span>
+                <span style="color:#a7abab;font-family: cursive;" class="nowrap">{{__('Welcome to')}}</span>
                 <span style="font-family: cursive;color: #75cf63;" class="nowrap"><a
-                        style="font-family: cursive;color: #75cf63;" href="{{ URL::to('/') }}">OwnStore.cc</a></span>
+                        style="font-family: cursive;color: #75cf63;"
+                        href="{{ URL::to('/') }}">{{__('OwnStore.cc')}}</a></span>
 
             </div>
             <div style="margin:auto"
                 class="topbar-text text-nowrap d-none d-md-inline-block border-left border-light pl-3 ml-3">
-                <span style="color:#a7abab;font-family: cursive;" class="nowrap">Please get</span>
+                <span style="color:#a7abab;font-family: cursive;" class="nowrap">{{__('Please get')}}</span>
                 <span style="font-family: cursive;color: #75cf63;" class="nowrap"><a style="color: #75cf63;"
-                        href="{{ URL::to('/subscription') }}">Pro </a></span>
-                <span style="color:#a7abab;font-family: cursive;" class="nowrap">for Complete Access</span>
+                        href="{{ URL::to('/subscription') }}">{{__('Pro')}} </a></span>
+                <span style="color:#a7abab;font-family: cursive;" class="nowrap">{{__('for Complete Access')}}</span>
 
 
             </div>
@@ -124,14 +125,14 @@
 
         <div class="d-none d-md-block ml-3 text-nowrap" style="    margin-right: 17px;">
             <a style="font-family: cursive !important;color: #75cf63;"
-                class="topbar-link ml-3 pl-3 d-none d-md-inline-block" href="{{ URL::to('/register') }}">FREE
-                ACCOUNT</a>
+                class="topbar-link ml-3 pl-3 d-none d-md-inline-block"
+                href="{{ URL::to('/register') }}">{{__('FREE ACCOUNT')}}</a>
             <a style="font-family: cursive !important;color: #75cf63;"
                 class="topbar-link ml-3 pl-3 border-left border-light d-none d-md-inline-block"
-                href="{{ URL::to('/register') }}">CREATE PRO ACCOUNT</a>
+                href="{{ URL::to('/register') }}">{{__('CREATE PRO ACCOUNT')}}</a>
             <a style="color:#a7abab;font-family: cursive !important"
                 class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block"
-                href="{{ URL::to('/login') }}">LOGIN</a>
+                href="{{ URL::to('/login') }}">{{__('LOGIN')}}</a>
         </div>
 
     </div>

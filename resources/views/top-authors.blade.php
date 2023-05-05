@@ -8,7 +8,7 @@
 </head>
 <body>
 @include('header')
-<section class="bg-position-center-top" style="background-image: url('{{ url('/') }}/public/storage/settings/{{ $allsettings->site_banner }}');">
+<section class="bg-position-center-top" style="background-color: #3a4a4e;">
       <div class="py-4">
         <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
         <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
@@ -228,7 +228,7 @@
           <!-- Sidebar-->
           <div class="cz-sidebar border-left ml-lg-auto" id="blog-sidebar">
             <div class="cz-sidebar-header box-shadow-sm">
-              <button class="close ml-auto" type="button" data-dismiss="sidebar" aria-label="Close"><span class="d-inline-block font-size-xs font-weight-normal align-middle">{{ __('Close sidebar') }}</span><span class="d-inline-block align-middle ml-2" aria-hidden="true">×</span></button>
+              <button class="close ml-auto" type="button" data-dismiss="sidebar" aria-label="Close"><span class="d-inline-block font-size-xs font-weight-normal align-middle">{{ __('Close sidebar') }}</span><span class="d-inline-block align-middle ml-2" aria-hidden="true">ï¿½</span></button>
             </div>
             <div class="cz-sidebar-body py-lg-1" data-simplebar="init" data-simplebar-auto-hide="true"><div class="simplebar-wrapper" style="margin: -4px -16px -4px -30px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" style="height: auto; overflow: hidden;"><div class="simplebar-content" style="padding: 4px 16px 4px 30px;">
               <!-- Categories-->
