@@ -147,7 +147,7 @@
                 <a class="navbar-brand d-none d-sm-block mr-4 order-lg-1" href="{{ URL::to('/') }}"
                     style="display:contents !important;min-width: 7rem;">
                     <!-- <img class="lazy" width="200" height="56" src="{{ url('/') }}/public/storage/settings/{{ $allsettings->site_logo }}"  alt="{{ $allsettings->site_title }}"/> -->
-                    <img src="public/d_images/index_11.png" width="343" height="230" alt="">
+                    <img src="{{url('/') }}/public/d_images/index_11.png" width="343" height="230" alt="">
                 </a>
                 @endif
                 @if($allsettings->site_logo != '')

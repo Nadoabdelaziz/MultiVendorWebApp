@@ -746,7 +746,7 @@ Route::get("/dog", function(){
 
 /* Help */
 
-Route::get('/help', 'ItemController@help');
+Route::get('/help', 'ItemController@help')->name('help');
 
 /* Help */
 

@@ -17,8 +17,7 @@
         @if(Auth::user()->user_type == 'vendor')
         @if(Auth::user()->user_subscr_date >= date('Y-m-d'))
 
-        <div class="page-title-overlap pt-4"
-            style="background-color: #3a4a4e;">
+        <div class="page-title-overlap pt-4" style="background-color: #3a4a4e;">
             <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
                 <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
                     <nav aria-label="breadcrumb">
@@ -66,7 +65,7 @@
                                                         class="intercom-interblocks-image intercom-interblocks-align-left">
                                                         <a href="https://downloads.intercomcdn.com/i/o/606964993/8c1e4b17dc25d720a629dde6/image.png"
                                                             target="_blank" rel="noreferrer nofollow noopener"><img
-                                                                src="https://downloads.intercomcdn.com/i/o/606964993/8c1e4b17dc25d720a629dde6/image.png"
+                                                                src="{{ url('/') }}/public/d_images/help1.png"
                                                                 width="3456" height="1816"></a>
                                                     </div>
                                                     <br>
@@ -96,7 +95,7 @@
                                                         class="intercom-interblocks-image intercom-interblocks-align-left">
                                                         <a href="https://downloads.intercomcdn.com/i/o/606965131/fbf039619cb0c39f4256b123/image.png"
                                                             target="_blank" rel="noreferrer nofollow noopener"><img
-                                                                src="https://downloads.intercomcdn.com/i/o/606965131/fbf039619cb0c39f4256b123/image.png"
+                                                                src="{{ url('/') }}/public/d_images/help2.png"
                                                                 width="3456" height="1818"></a>
                                                     </div>
 
@@ -114,7 +113,7 @@
                                                         class="intercom-interblocks-image intercom-interblocks-align-left">
                                                         <a href="https://downloads.intercomcdn.com/i/o/656731717/3df6b55c00923d88a9711e24/image.png"
                                                             target="_blank" rel="noreferrer nofollow noopener"><img
-                                                                src="https://downloads.intercomcdn.com/i/o/656731717/3df6b55c00923d88a9711e24/image.png"
+                                                                src="{{ url('/') }}/public/d_images/help3.png"
                                                                 width="3456" height="1816"></a>
                                                     </div>
 
@@ -169,7 +168,7 @@
                                                         class="intercom-interblocks-image intercom-interblocks-align-left">
                                                         <a href="https://downloads.intercomcdn.com/i/o/606966555/df6505c20f4ec1a4f95f27d5/image.png"
                                                             target="_blank" rel="noreferrer nofollow noopener"><img
-                                                                src="https://downloads.intercomcdn.com/i/o/606966555/df6505c20f4ec1a4f95f27d5/image.png"
+                                                                src="{{ url('/') }}/public/d_images/selix1.png"
                                                                 width="3456" height="1818"></a>
                                                     </div>
 
@@ -200,7 +199,7 @@
                                                         class="intercom-interblocks-image intercom-interblocks-align-left">
                                                         <a href="https://downloads.intercomcdn.com/i/o/656732434/30e11e2b8635faa30c151175/Screenshot+2023-01-21+at+01.23.49.png"
                                                             target="_blank" rel="noreferrer nofollow noopener"><img
-                                                                src="https://downloads.intercomcdn.com/i/o/656732434/30e11e2b8635faa30c151175/Screenshot+2023-01-21+at+01.23.49.png"
+                                                                src="{{ url('/') }}/public/d_images/selix2.png"
                                                                 width="2336" height="1302"></a>
                                                     </div>
 
@@ -222,7 +221,7 @@
                                                         class="intercom-interblocks-image intercom-interblocks-align-left">
                                                         <a href="https://downloads.intercomcdn.com/i/o/656732593/57a3eb23fc7f8e4624a9236e/image.png"
                                                             target="_blank" rel="noreferrer nofollow noopener"><img
-                                                                src="https://downloads.intercomcdn.com/i/o/656732593/57a3eb23fc7f8e4624a9236e/image.png"
+                                                                src="{{ url('/') }}/public/d_images/selix3.png"
                                                                 width="2334" height="760"></a>
                                                     </div>
 
@@ -256,7 +255,7 @@
                                                         class="intercom-interblocks-image intercom-interblocks-align-left">
                                                         <a href="https://downloads.intercomcdn.com/i/o/606969117/7e5dbdc4136b44a5606846ec/image.png"
                                                             target="_blank" rel="noreferrer nofollow noopener"><img
-                                                                src="https://downloads.intercomcdn.com/i/o/606969117/7e5dbdc4136b44a5606846ec/image.png"
+                                                                src="{{ url('/') }}/public/d_images/selix3.png"
                                                                 width="2604" height="754"></a>
                                                     </div>
                                                 </article>

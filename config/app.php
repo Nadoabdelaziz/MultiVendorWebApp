@@ -109,7 +109,6 @@ return [
 		  'English' => 'en',
 		  'Spanish' => 'es',
 		  'Arabic' => 'ar',
-      'German' => 'gr',
 		],
 
     'faker_locale' => 'en_US',

@@ -147,7 +147,7 @@
                 <a class="navbar-brand d-none d-sm-block mr-4 order-lg-1" href="<?php echo e(URL::to('/')); ?>"
                     style="display:contents !important;min-width: 7rem;">
                     <!-- <img class="lazy" width="200" height="56" src="<?php echo e(url('/')); ?>/public/storage/settings/<?php echo e($allsettings->site_logo); ?>"  alt="<?php echo e($allsettings->site_title); ?>"/> -->
-                    <img src="public/d_images/index_11.png" width="343" height="230" alt="">
+                    <img src="<?php echo e(url('/')); ?>/public/d_images/index_11.png" width="343" height="230" alt="">
                 </a>
                 <?php endif; ?>
                 <?php if($allsettings->site_logo != ''): ?>
