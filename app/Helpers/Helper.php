@@ -393,14 +393,23 @@ class Helper {
 	public static function price_format($position,$price,$type) 
     {
 	    $allsettings = Settings::allSettings();
-		if($type == "symbol") { $pre = $allsettings->site_currency_symbol; } else { $pre = $allsettings->site_currency; }
+		if($type == "symbol") { 
+			$pre = $allsettings->site_currency_symbol; 
+			$bitcoin = $allsettings->google_drive_api; 
+		} 
+		else {
+			 $pre = $allsettings->site_currency; 
+			 $bitcoin = $allsettings->google_drive_api; 
+
+		}
+		
 	    if($position == "left")
         {
-        $price_info = $pre.$price;
+        $price_info = $pre.$price . " / " .$bitcoin.$price*0.000037;
         }
         else
         {
-        $price_info = $price.$pre;
+        $price_info = $price.$pre. " / " .$bitcoin.$price*0.000037;
         }
 		return $price_info;
 	}

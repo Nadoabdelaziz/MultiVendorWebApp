@@ -1,29 +1,29 @@
-@if($allsettings->maintenance_mode == 0)
+<?php if($allsettings->maintenance_mode == 0): ?>
 <!DOCTYPE HTML>
 <html lang="en">
 
     <head>
-        <title>{{ $allsettings->site_title }} - {{ __('Checkout') }}</title>
-        @include('meta')
-        @include('style')
+        <title><?php echo e($allsettings->site_title); ?> - <?php echo e(__('Checkout')); ?></title>
+        <?php echo $__env->make('meta', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php echo $__env->make('style', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </head>
 
     <body>
-        @include('header')
+        <?php echo $__env->make('header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <div class="page-title-overlap pt-4" style="background-color: #3a4a4e;">
             <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
                 <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb flex-lg-nowrap justify-content-center justify-content-lg-star">
-                            <li class="breadcrumb-item"><a class="text-nowrap" href="{{ URL::to('/') }}"><i
-                                        class="dwg-home"></i>{{ __('Home') }}</a></li>
-                            <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ __('Checkout') }}</li>
+                            <li class="breadcrumb-item"><a class="text-nowrap" href="<?php echo e(URL::to('/')); ?>"><i
+                                        class="dwg-home"></i><?php echo e(__('Home')); ?></a></li>
+                            <li class="breadcrumb-item text-nowrap active" aria-current="page"><?php echo e(__('Checkout')); ?></li>
                             </li>
                         </ol>
                     </nav>
                 </div>
                 <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
-                    <h1 class="h3 mb-0 text-white">{{ __('Checkout') }}</h1>
+                    <h1 class="h3 mb-0 text-white"><?php echo e(__('Checkout')); ?></h1>
                 </div>
             </div>
         </div>
@@ -32,36 +32,37 @@
                 <div class="row">
 
                     <!-- Content-->
-                    @if($cart_count != 0)
+                    <?php if($cart_count != 0): ?>
                     <section class="col-lg-8 pt-2 pt-lg-4 pb-4 mb-3">
-                        <form action="{{ route('checkout') }}" class="needs-validation" id="checkout_form" method="post"
+                        <form action="<?php echo e(route('checkout')); ?>" class="needs-validation" id="checkout_form" method="post"
                             enctype="multipart/form-data">
-                            {{ csrf_field() }}
+                            <?php echo e(csrf_field()); ?>
+
                             <div class="pt-2 px-4 pr-lg-0 pl-xl-5">
-                                @if(Auth::guest())
-                                <h2 class="h6 border-bottom pb-3 mb-3">{{ __('Not a customer yet?') }}</h2>
+                                <?php if(Auth::guest()): ?>
+                                <h2 class="h6 border-bottom pb-3 mb-3"><?php echo e(__('Not a customer yet?')); ?></h2>
                                 <!-- Billing detail-->
                                 <div class="row pb-4">
                                     <div class="col-6 form-group">
-                                        <label for="mc-email">{{ __('Email Address') }} <span
+                                        <label for="mc-email"><?php echo e(__('Email Address')); ?> <span
                                                 class='text-danger'>*</span></label>
                                         <input type="text" id="email" class="form-control" name="email"
                                             data-bvalidator="required,email">
                                     </div>
                                     <div class="col-sm-6 form-group">
-                                        <label for="mc-company">{{ __('Password') }} <span
+                                        <label for="mc-company"><?php echo e(__('Password')); ?> <span
                                                 class='text-danger'>*</span></label>
                                         <input type="text" id="password" class="form-control" name="password"
                                             data-bvalidator="required,minlen[6]">
                                     </div>
                                 </div>
-                                @endif
-                                @if (Auth::check())
-                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                @endif
+                                <?php endif; ?>
+                                <?php if(Auth::check()): ?>
+                                <input type="hidden" name="user_id" value="<?php echo e(Auth::user()->id); ?>">
+                                <?php endif; ?>
                                 <div class="widget mb-3 d-lg-none">
-                                    <h2 class="widget-title">{{ __('Order Summary') }}</h2>
-                                    @php
+                                    <h2 class="widget-title"><?php echo e(__('Order Summary')); ?></h2>
+                                    <?php
                                     $subtotal = 0;
                                     $order_id = '';
                                     $item_price = '';
@@ -73,40 +74,40 @@
                                     $coupon_code = "";
                                     $new_price = 0;
                                     $processfee = 0;
-                                    @endphp
-                                    @foreach($cart['item'] as $cart)
-                                    @php
+                                    ?>
+                                    <?php $__currentLoopData = $cart['item']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cart): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php
                                     $itemprice = $cart->total_price;
-                                    @endphp
+                                    ?>
                                     <div class="media align-items-center pb-2 border-bottom">
-                                        <a class="d-block mr-2" href="{{ url('/item') }}/{{ $cart->item_slug }}">
-                                            @if($cart->item_thumbnail!='')
+                                        <a class="d-block mr-2" href="<?php echo e(url('/item')); ?>/<?php echo e($cart->item_slug); ?>">
+                                            <?php if($cart->item_thumbnail!=''): ?>
                                             <img class="lazy rounded-sm" width="64" height="49"
-                                                src="{{ Helper::Image_Path($cart->item_thumbnail,'no-image.png') }}"
-                                                alt="{{ $cart->item_name }}" />
-                                            @else
+                                                src="<?php echo e(Helper::Image_Path($cart->item_thumbnail,'no-image.png')); ?>"
+                                                alt="<?php echo e($cart->item_name); ?>" />
+                                            <?php else: ?>
                                             <img class="lazy rounded-sm" width="64" height="49"
-                                                src="{{ url('/') }}/public/img/no-image.png"
-                                                alt="{{ $cart->item_name }}" />
-                                            @endif
+                                                src="<?php echo e(url('/')); ?>/public/img/no-image.png"
+                                                alt="<?php echo e($cart->item_name); ?>" />
+                                            <?php endif; ?>
                                         </a>
                                         <div class="media-body pl-1">
                                             <h6 class="widget-product-title"><a
-                                                    href="{{ url('/item') }}/{{ $cart->item_slug }}">{{ $cart->item_name }}</a>
+                                                    href="<?php echo e(url('/item')); ?>/<?php echo e($cart->item_slug); ?>"><?php echo e($cart->item_name); ?></a>
                                             </h6>
                                             <div class="widget-product-meta"><span
-                                                    class="text-accent border-right pr-2 mr-2">{{ Helper::price_format($allsettings->site_currency_position,$itemprice,"symbol") }}</span><span
-                                                    class="font-size-xs text-muted">{{ $cart->license }}@if($cart->license
-                                                    == 'regular') ({{ $additional->regular_license }})
-                                                    @elseif($cart->license == 'extended')
-                                                    ({{ $additional->extended_license }}) @endif</span></div>
-                                            @if($cart->file_type == 'serial')
-                                            <span class="font-size-xs">{{ __('Stock') }} :
-                                                {{ $cart->item_serial_stock }}</span>
-                                            @endif
+                                                    class="text-accent border-right pr-2 mr-2"><?php echo e(Helper::price_format($allsettings->site_currency_position,$itemprice,"symbol")); ?></span><span
+                                                    class="font-size-xs text-muted"><?php echo e($cart->license); ?><?php if($cart->license
+                                                    == 'regular'): ?> (<?php echo e($additional->regular_license); ?>)
+                                                    <?php elseif($cart->license == 'extended'): ?>
+                                                    (<?php echo e($additional->extended_license); ?>) <?php endif; ?></span></div>
+                                            <?php if($cart->file_type == 'serial'): ?>
+                                            <span class="font-size-xs"><?php echo e(__('Stock')); ?> :
+                                                <?php echo e($cart->item_serial_stock); ?></span>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
-                                    @php
+                                    <?php
                                     $processfee += $cart->total_price;
                                     $subtotal += $cart->total_price;
                                     $order_id .= $cart->ord_id.',';
@@ -135,9 +136,9 @@
                                     {
                                     $commission +=($price * $allsettings->site_non_exclusive_commission) / 100;
                                     }
-                                    @endphp
-                                    @endforeach
-                                    @php
+                                    ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php
                                     if($addition_settings->site_extra_fee_type == 'fixed')
                                     {
                                     $extra_fee = $allsettings->site_extra_fee;
@@ -146,75 +147,75 @@
                                     {
                                     $extra_fee = ($allsettings->site_extra_fee * $processfee) / 100;
                                     }
-                                    @endphp
+                                    ?>
                                     <ul class="list-unstyled font-size-sm py-3">
-                                        @if($extra_fee != 0)
+                                        <?php if($extra_fee != 0): ?>
                                         <li class="d-flex justify-content-between align-items-center"><span
-                                                class="mr-2">{{ __('Processing Fee') }}</span><span
-                                                class="text-right">{{ Helper::price_format($allsettings->site_currency_position,$extra_fee,"symbol") }}</span>
+                                                class="mr-2"><?php echo e(__('Processing Fee')); ?></span><span
+                                                class="text-right"><?php echo e(Helper::price_format($allsettings->site_currency_position,$extra_fee,"symbol")); ?></span>
                                         </li>
-                                        @endif
-                                        @if($coupon_code != "")
-                                        @php
+                                        <?php endif; ?>
+                                        <?php if($coupon_code != ""): ?>
+                                        <?php
                                         $coupon_discount = $subtotal - $new_price;
                                         $final = $new_price + $extra_fee;
                                         $last_price = $new_price;
                                         $priceamount = $new_price;
-                                        @endphp
+                                        ?>
                                         <li class="d-flex justify-content-between align-items-center font-size-base">
-                                            <span class="mr-2">{{ __('Discount Price') }}</span><span
+                                            <span class="mr-2"><?php echo e(__('Discount Price')); ?></span><span
                                                 class="text-right"> -
-                                                {{ Helper::price_format($allsettings->site_currency_position,$coupon_discount,"symbol") }}</span>
+                                                <?php echo e(Helper::price_format($allsettings->site_currency_position,$coupon_discount,"symbol")); ?></span>
                                         </li>
-                                        @else
-                                        @php
+                                        <?php else: ?>
+                                        <?php
                                         $final = $subtotal+$extra_fee;
                                         $last_price = $subtotal;
                                         $priceamount = $subtotal;
-                                        @endphp
-                                        @endif
-                                        @if($country_percent != 0)
-                                        @php
+                                        ?>
+                                        <?php endif; ?>
+                                        <?php if($country_percent != 0): ?>
+                                        <?php
                                         $vat_price = ($single_price * $country_percent) / 100;
-                                        @endphp
+                                        ?>
                                         <li class="d-flex justify-content-between align-items-center font-size-base">
-                                            <span class="mr-2">{{ __('VAT') }} (%)</span><span
-                                                class="text-right">{{ Helper::price_format($allsettings->site_currency_position,$vat_price,"symbol") }}</span>
+                                            <span class="mr-2"><?php echo e(__('VAT')); ?> (%)</span><span
+                                                class="text-right"><?php echo e(Helper::price_format($allsettings->site_currency_position,$vat_price,"symbol")); ?></span>
                                         </li>
-                                        @else
-                                        @php
+                                        <?php else: ?>
+                                        <?php
                                         $vat_price = 0;
-                                        @endphp
-                                        @endif
-                                        @php
+                                        ?>
+                                        <?php endif; ?>
+                                        <?php
                                         $finly = $final+$vat_price;
-                                        @endphp
+                                        ?>
                                         <li class="d-flex justify-content-between align-items-center font-size-base">
-                                            <span class="mr-2">{{ __('Total') }}</span><span
-                                                class="text-right">{{ Helper::price_format($allsettings->site_currency_position,$finly,"symbol") }}</span>
+                                            <span class="mr-2"><?php echo e(__('Total')); ?></span><span
+                                                class="text-right"><?php echo e(Helper::price_format($allsettings->site_currency_position,$finly,"symbol")); ?></span>
                                         </li>
                                     </ul>
-                                    @php
+                                    <?php
                                     $vendor_amount = $priceamount - $commission;
-                                    @endphp
-                                    <input type="hidden" name="order_id" value="{{ rtrim($order_id,',') }}">
+                                    ?>
+                                    <input type="hidden" name="order_id" value="<?php echo e(rtrim($order_id,',')); ?>">
                                     <input type="hidden" name="item_prices"
-                                        value="{{ base64_encode(rtrim($item_price,',')) }}">
-                                    <input type="hidden" name="item_user_id" value="{{ rtrim($item_userid,',') }}">
-                                    <input type="hidden" name="vat_price" value="{{ base64_encode($vat_price) }}">
-                                    <input type="hidden" name="amount" value="{{ base64_encode($last_price) }}">
-                                    <input type="hidden" name="processing_fee" value="{{ base64_encode($extra_fee) }}">
-                                    <input type="hidden" name="website_url" value="{{ url('/') }}">
-                                    <input type="hidden" name="admin_amount" value="{{ base64_encode($commission) }}">
+                                        value="<?php echo e(base64_encode(rtrim($item_price,','))); ?>">
+                                    <input type="hidden" name="item_user_id" value="<?php echo e(rtrim($item_userid,',')); ?>">
+                                    <input type="hidden" name="vat_price" value="<?php echo e(base64_encode($vat_price)); ?>">
+                                    <input type="hidden" name="amount" value="<?php echo e(base64_encode($last_price)); ?>">
+                                    <input type="hidden" name="processing_fee" value="<?php echo e(base64_encode($extra_fee)); ?>">
+                                    <input type="hidden" name="website_url" value="<?php echo e(url('/')); ?>">
+                                    <input type="hidden" name="admin_amount" value="<?php echo e(base64_encode($commission)); ?>">
                                     <input type="hidden" name="vendor_amount"
-                                        value="{{ base64_encode($vendor_amount) }}">
+                                        value="<?php echo e(base64_encode($vendor_amount)); ?>">
                                     <input type="hidden" name="token" class="token">
-                                    <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}">
+                                    <input type="hidden" name="reference" value="<?php echo e(Paystack::genTranxRef()); ?>">
                                 </div>
                                 <div class="accordion mb-2" id="payment-method" role="tablist">
-                                    @php $no = 1; @endphp
-                                    @foreach($get_payment as $payment)
-                                    @php
+                                    <?php $no = 1; ?>
+                                    <?php $__currentLoopData = $get_payment; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php
                                     if($payment == '2checkout')
                                     {
                                     $payment = 'twocheckout';
@@ -223,231 +224,233 @@
                                     {
                                     $payment = $payment;
                                     }
-                                    @endphp
+                                    ?>
                                     <div class="card">
                                         <div class="card-header" role="tab">
-                                            @if (Auth::check())
-                                            <h3 class="accordion-heading"><a href="#{{ $payment }}" id="{{ $payment }}"
-                                                    data-toggle="collapse">{{ __('Pay with') }} @if($payment ==
-                                                    'twocheckout') {{ __('2Checkout') }} @else {{ $payment }}
-                                                    @endif<span class="accordion-indicator"><i
+                                            <?php if(Auth::check()): ?>
+                                            <h3 class="accordion-heading"><a href="#<?php echo e($payment); ?>" id="<?php echo e($payment); ?>"
+                                                    data-toggle="collapse"><?php echo e(__('Pay with')); ?> <?php if($payment ==
+                                                    'twocheckout'): ?> <?php echo e(__('2Checkout')); ?> <?php else: ?> <?php echo e($payment); ?>
+
+                                                    <?php endif; ?><span class="accordion-indicator"><i
                                                             data-feather="chevron-up"></i></span></a></h3>
-                                            @else
-                                            @if($payment != 'wallet')
-                                            <h3 class="accordion-heading"><a href="#{{ $payment }}" id="{{ $payment }}"
-                                                    data-toggle="collapse">{{ __('Pay with') }} @if($payment ==
-                                                    'twocheckout') {{ __('2Checkout') }} @else {{ $payment }}
-                                                    @endif<span class="accordion-indicator"><i
+                                            <?php else: ?>
+                                            <?php if($payment != 'wallet'): ?>
+                                            <h3 class="accordion-heading"><a href="#<?php echo e($payment); ?>" id="<?php echo e($payment); ?>"
+                                                    data-toggle="collapse"><?php echo e(__('Pay with')); ?> <?php if($payment ==
+                                                    'twocheckout'): ?> <?php echo e(__('2Checkout')); ?> <?php else: ?> <?php echo e($payment); ?>
+
+                                                    <?php endif; ?><span class="accordion-indicator"><i
                                                             data-feather="chevron-up"></i></span></a></h3>
-                                            @endif
-                                            @endif
+                                            <?php endif; ?>
+                                            <?php endif; ?>
                                         </div>
-                                        <div class="collapse @if($no == 1) show @endif" id="{{ $payment }}"
+                                        <div class="collapse <?php if($no == 1): ?> show <?php endif; ?>" id="<?php echo e($payment); ?>"
                                             data-parent="#payment-method" role="tabpanel">
-                                            @if($payment == 'paypal')
+                                            <?php if($payment == 'paypal'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" @if($no==1) checked @endif
-                                                            data-bvalidator="required"> {{ __('PayPal') }}</span> -
-                                                    {{ __('the safer, easier way to pay') }}</p>
+                                                            value="<?php echo e($payment); ?>" <?php if($no==1): ?> checked <?php endif; ?>
+                                                            data-bvalidator="required"> <?php echo e(__('PayPal')); ?></span> -
+                                                    <?php echo e(__('the safer, easier way to pay')); ?></p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with PayPal') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with PayPal')); ?></button>
                                             </div>
-                                            @endif
-                                            @if($payment == 'stripe')
+                                            <?php endif; ?>
+                                            <?php if($payment == 'stripe'): ?>
                                             <div class="card-body font-size-sm custom-radio custom-control">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('Stripe') }}</span> - {{ __('Credit or debit card') }}</p>
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('Stripe')); ?></span> - <?php echo e(__('Credit or debit card')); ?></p>
                                                 <div class="stripebox mb-3" id="ifYes" style="display:none;">
-                                                    <label for="card-element">{{ __('Credit or debit card') }}</label>
+                                                    <label for="card-element"><?php echo e(__('Credit or debit card')); ?></label>
                                                     <div id="card-element"></div>
                                                     <div id="card-errors" role="alert"></div>
                                                 </div>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with Stripe') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with Stripe')); ?></button>
                                             </div>
-                                            @endif
-                                            @if (Auth::check())
-                                            @if($payment == 'wallet')
+                                            <?php endif; ?>
+                                            <?php if(Auth::check()): ?>
+                                            <?php if($payment == 'wallet'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('Wallet') }}</span> -
-                                                    ({{ Helper::price_format($allsettings->site_currency_position,Auth::user()->earnings,"symbol") }})
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('Wallet')); ?></span> -
+                                                    (<?php echo e(Helper::price_format($allsettings->site_currency_position,Auth::user()->earnings,"symbol")); ?>)
                                                 </p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with Wallet') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with Wallet')); ?></button>
                                             </div>
-                                            @endif
-                                            @endif
-                                            @if($payment == 'twocheckout')
+                                            <?php endif; ?>
+                                            <?php endif; ?>
+                                            <?php if($payment == 'twocheckout'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('2Checkout') }}</span></p>
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('2Checkout')); ?></span></p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with 2Checkout') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with 2Checkout')); ?></button>
                                             </div>
-                                            @endif
-                                            @if($payment == 'paystack')
+                                            <?php endif; ?>
+                                            <?php if($payment == 'paystack'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('PayStack') }}</span></p>
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('PayStack')); ?></span></p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with PayStack') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with PayStack')); ?></button>
                                             </div>
-                                            @endif
-                                            @if($payment == 'localbank')
+                                            <?php endif; ?>
+                                            <?php if($payment == 'localbank'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('Local Bank') }}</span></p>
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('Local Bank')); ?></span></p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with Local Bank') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with Local Bank')); ?></button>
                                             </div>
-                                            @endif
-                                            @if($payment == 'razorpay')
+                                            <?php endif; ?>
+                                            <?php if($payment == 'razorpay'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('Razorpay') }}</span></p>
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('Razorpay')); ?></span></p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with Razorpay') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with Razorpay')); ?></button>
                                             </div>
-                                            @endif
-                                            @if($payment == 'payhere')
+                                            <?php endif; ?>
+                                            <?php if($payment == 'payhere'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('Payhere') }}</span></p>
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('Payhere')); ?></span></p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with Payhere') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with Payhere')); ?></button>
                                             </div>
-                                            @endif
-                                            @if($payment == 'payumoney')
+                                            <?php endif; ?>
+                                            <?php if($payment == 'payumoney'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('Payumoney') }}</span></p>
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('Payumoney')); ?></span></p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with Payumoney') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with Payumoney')); ?></button>
                                             </div>
-                                            @endif
-                                            @if($payment == 'iyzico')
+                                            <?php endif; ?>
+                                            <?php if($payment == 'iyzico'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('Iyzico') }}</span></p>
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('Iyzico')); ?></span></p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with Iyzico') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with Iyzico')); ?></button>
                                             </div>
-                                            @endif
-                                            @if($payment == 'flutterwave')
+                                            <?php endif; ?>
+                                            <?php if($payment == 'flutterwave'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('Flutterwave') }}</span></p>
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('Flutterwave')); ?></span></p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with Flutterwave') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with Flutterwave')); ?></button>
                                             </div>
-                                            @endif
-                                            @if($payment == 'coingate')
+                                            <?php endif; ?>
+                                            <?php if($payment == 'coingate'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('Coingate') }}</span></p>
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('Coingate')); ?></span></p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with Coingate') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with Coingate')); ?></button>
                                             </div>
-                                            @endif
-                                            @if($payment == 'ipay')
+                                            <?php endif; ?>
+                                            <?php if($payment == 'ipay'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('iPay') }}</span></p>
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('iPay')); ?></span></p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with iPay') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with iPay')); ?></button>
                                             </div>
-                                            @endif
-                                            @if($payment == 'payfast')
+                                            <?php endif; ?>
+                                            <?php if($payment == 'payfast'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('PayFast') }}</span></p>
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('PayFast')); ?></span></p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with PayFast') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with PayFast')); ?></button>
                                             </div>
-                                            @endif
-                                            @if($payment == 'coinpayments')
+                                            <?php endif; ?>
+                                            <?php if($payment == 'coinpayments'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('CoinPayments') }}</span></p>
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('CoinPayments')); ?></span></p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with CoinPayments') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with CoinPayments')); ?></button>
                                             </div>
-                                            @endif
-                                            @if($payment == 'mercadopago')
+                                            <?php endif; ?>
+                                            <?php if($payment == 'mercadopago'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('Mercadopago') }}</span></p>
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('Mercadopago')); ?></span></p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with Mercadopago') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with Mercadopago')); ?></button>
                                             </div>
-                                            @endif
-                                            @if($payment == 'sslcommerz')
+                                            <?php endif; ?>
+                                            <?php if($payment == 'sslcommerz'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('SSLCommerz') }}</span></p>
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('SSLCommerz')); ?></span></p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with SSLCommerz') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with SSLCommerz')); ?></button>
                                             </div>
-                                            @endif
-                                            @if($payment == 'instamojo')
+                                            <?php endif; ?>
+                                            <?php if($payment == 'instamojo'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('Instamojo') }}</span></p>
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('Instamojo')); ?></span></p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with Instamojo') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with Instamojo')); ?></button>
                                             </div>
-                                            @endif
-                                            @if($payment == 'aamarpay')
+                                            <?php endif; ?>
+                                            <?php if($payment == 'aamarpay'): ?>
                                             <div class="card-body font-size-sm custom-control custom-radio">
-                                                <p><span class='font-weight-medium'><input id="opt1-{{ $payment }}"
+                                                <p><span class='font-weight-medium'><input id="opt1-<?php echo e($payment); ?>"
                                                             name="payment_method" type="radio" class="custom_radio"
-                                                            value="{{ $payment }}" data-bvalidator="required">
-                                                        {{ __('Aamarpay') }}</span></p>
+                                                            value="<?php echo e($payment); ?>" data-bvalidator="required">
+                                                        <?php echo e(__('Aamarpay')); ?></span></p>
                                                 <button class="btn btn-primary"
-                                                    type="submit">{{ __('Checkout with Aamarpay') }}</button>
+                                                    type="submit"><?php echo e(__('Checkout with Aamarpay')); ?></button>
                                             </div>
-                                            @endif
+                                            <?php endif; ?>
                                         </div>
                                     </div>
-                                    @php $no++; @endphp
-                                    @endforeach
+                                    <?php $no++; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
                             </div>
                         </form>
@@ -456,8 +459,8 @@
                         <hr class="d-lg-none">
                         <div class="cz-sidebar-static h-100 ml-auto border-left">
                             <div class="widget mb-3">
-                                <h2 class="widget-title text-center">{{ __('Order Summary') }}</h2>
-                                @php
+                                <h2 class="widget-title text-center"><?php echo e(__('Order Summary')); ?></h2>
+                                <?php
                                 $subtotal = 0;
                                 $order_id = '';
                                 $item_price = '';
@@ -469,42 +472,43 @@
                                 $coupon_code = "";
                                 $new_price = 0;
                                 $processfee = 0;
-                                @endphp
-                                @foreach($mobile['item'] as $cart)
-                                @php
+                                ?>
+                                <?php $__currentLoopData = $mobile['item']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cart): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php
                                 $itemprice = $cart->total_price;
-                                @endphp
+                                ?>
                                 <div class="media align-items-center pb-3 mb-3 border-bottom">
-                                    <a class="d-block mr-2" href="{{ url('/item') }}/{{ $cart->item_slug }}">
-                                        @if($cart->item_thumbnail!='')
+                                    <a class="d-block mr-2" href="<?php echo e(url('/item')); ?>/<?php echo e($cart->item_slug); ?>">
+                                        <?php if($cart->item_thumbnail!=''): ?>
                                         <img class="lazy rounded-sm" width="64" height="49"
-                                            src="{{ Helper::Image_Path($cart->item_thumbnail,'no-image.png') }}"
-                                            alt="{{ $cart->item_name }}" />
-                                        @else
+                                            src="<?php echo e(Helper::Image_Path($cart->item_thumbnail,'no-image.png')); ?>"
+                                            alt="<?php echo e($cart->item_name); ?>" />
+                                        <?php else: ?>
                                         <img class="lazy rounded-sm" width="64" height="49"
-                                            src="{{ url('/') }}/public/img/no-image.png" alt="{{ $cart->item_name }}" />
-                                        @endif
+                                            src="<?php echo e(url('/')); ?>/public/img/no-image.png" alt="<?php echo e($cart->item_name); ?>" />
+                                        <?php endif; ?>
                                     </a>
                                     <div class="media-body pl-1">
                                         <h6 class="widget-product-title"><a
-                                                href="{{ url('/item') }}/{{ $cart->item_slug }}">{{ $cart->item_name }}</a>
+                                                href="<?php echo e(url('/item')); ?>/<?php echo e($cart->item_slug); ?>"><?php echo e($cart->item_name); ?></a>
                                         </h6>
                                         <div class="widget-product-meta"><span
-                                                class="text-accent border-right pr-2 mr-2">{{ Helper::price_format($allsettings->site_currency_position,$itemprice,"symbol") }}</span><span
-                                                class="font-size-xs text-muted">{{ $cart->license }}@if($cart->license
-                                                == 'regular') - {{ $additional->regular_license }}
-                                                @if($cart->item_support == 1) {{ __('Support') }} @else
-                                                {{ __('not support') }} @endif @elseif($cart->license == 'extended') -
-                                                {{ $additional->extended_license }} @if($cart->item_support == 1)
-                                                {{ __('Support') }} @else {{ __('not support') }} @endif @endif</span>
+                                                class="text-accent border-right pr-2 mr-2"><?php echo e(Helper::price_format($allsettings->site_currency_position,$itemprice,"symbol")); ?></span><span
+                                                class="font-size-xs text-muted"><?php echo e($cart->license); ?><?php if($cart->license
+                                                == 'regular'): ?> - <?php echo e($additional->regular_license); ?>
+
+                                                <?php if($cart->item_support == 1): ?> <?php echo e(__('Support')); ?> <?php else: ?>
+                                                <?php echo e(__('not support')); ?> <?php endif; ?> <?php elseif($cart->license == 'extended'): ?> -
+                                                <?php echo e($additional->extended_license); ?> <?php if($cart->item_support == 1): ?>
+                                                <?php echo e(__('Support')); ?> <?php else: ?> <?php echo e(__('not support')); ?> <?php endif; ?> <?php endif; ?></span>
                                         </div>
-                                        @if($cart->file_type == 'serial')
-                                        <span class="font-size-xs">{{ __('Stock') }} :
-                                            {{ $cart->item_serial_stock }}</span>
-                                        @endif
+                                        <?php if($cart->file_type == 'serial'): ?>
+                                        <span class="font-size-xs"><?php echo e(__('Stock')); ?> :
+                                            <?php echo e($cart->item_serial_stock); ?></span>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
-                                @php
+                                <?php
                                 $processfee += $cart->total_price;
                                 $subtotal += $cart->total_price;
                                 $order_id .= $cart->ord_id.',';
@@ -533,9 +537,9 @@
                                 {
                                 $commission +=($price * $allsettings->site_non_exclusive_commission) / 100;
                                 }
-                                @endphp
-                                @endforeach
-                                @php
+                                ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php
                                 if($addition_settings->site_extra_fee_type == 'fixed')
                                 {
                                 $extra_fee = $allsettings->site_extra_fee;
@@ -544,73 +548,74 @@
                                 {
                                 $extra_fee = ($allsettings->site_extra_fee * $processfee) / 100;
                                 }
-                                @endphp
+                                ?>
                                 <ul class="list-unstyled font-size-sm pt-3 pb-2 border-bottom">
-                                    @if($extra_fee != 0)
+                                    <?php if($extra_fee != 0): ?>
                                     <li class="d-flex justify-content-between align-items-center"><span
-                                            class="mr-2">{{ __('Processing Fee') }}</span><span
-                                            class="text-right">{{ Helper::price_format($allsettings->site_currency_position,$extra_fee,"symbol") }}</span>
+                                            class="mr-2"><?php echo e(__('Processing Fee')); ?></span><span
+                                            class="text-right"><?php echo e(Helper::price_format($allsettings->site_currency_position,$extra_fee,"symbol")); ?></span>
                                     </li>
-                                    @endif
-                                    @if($coupon_code != "")
-                                    @php
+                                    <?php endif; ?>
+                                    <?php if($coupon_code != ""): ?>
+                                    <?php
                                     $coupon_discount = $subtotal - $new_price;
                                     $final = $new_price + $extra_fee;
                                     $last_price = $new_price;
                                     $priceamount = $new_price;
-                                    @endphp
+                                    ?>
                                     <li class="d-flex justify-content-between align-items-center"><span
-                                            class="mr-2">{{ __('Discount Price') }}</span><span class="text-right"> -
-                                            {{ Helper::price_format($allsettings->site_currency_position,$coupon_discount,"symbol") }}</span>
+                                            class="mr-2"><?php echo e(__('Discount Price')); ?></span><span class="text-right"> -
+                                            <?php echo e(Helper::price_format($allsettings->site_currency_position,$coupon_discount,"symbol")); ?></span>
                                     </li>
-                                    @else
-                                    @php
+                                    <?php else: ?>
+                                    <?php
                                     $final = $subtotal+$extra_fee;
                                     $last_price = $subtotal;
                                     $priceamount = $subtotal;
-                                    @endphp
-                                    @endif
-                                    @if($country_percent != 0)
-                                    @php
+                                    ?>
+                                    <?php endif; ?>
+                                    <?php if($country_percent != 0): ?>
+                                    <?php
                                     $vat_price = ($single_price * $country_percent) / 100;
-                                    @endphp
+                                    ?>
                                     <li class="d-flex justify-content-between align-items-center"><span
-                                            class="mr-2">{{ __('VAT') }} (%)</span><span
-                                            class="text-right">{{ Helper::price_format($allsettings->site_currency_position,$vat_price,"symbol") }}</span>
+                                            class="mr-2"><?php echo e(__('VAT')); ?> (%)</span><span
+                                            class="text-right"><?php echo e(Helper::price_format($allsettings->site_currency_position,$vat_price,"symbol")); ?></span>
                                     </li>
-                                    @else
-                                    @php
+                                    <?php else: ?>
+                                    <?php
                                     $vat_price = 0;
-                                    @endphp
-                                    @endif
-                                    @php
+                                    ?>
+                                    <?php endif; ?>
+                                    <?php
                                     $finbb = $final + $vat_price;
-                                    @endphp
+                                    ?>
                                     <h3 class="font-weight-normal text-center my-4">
-                                        {{ Helper::price_format($allsettings->site_currency_position,$finbb,"symbol") }}
+                                        <?php echo e(Helper::price_format($allsettings->site_currency_position,$finbb,"symbol")); ?>
+
                                     </h3>
                                 </ul>
                             </div>
                         </div>
                     </aside>
-                    @else
+                    <?php else: ?>
                     <section class="col-lg-12 pt-2 pt-lg-4 pb-4 mb-3">
                         <div class="pt-2 px-4 pr-lg-0 pl-xl-5">
                             <div class="col-lg-12" data-aos="fade-up" data-aos-delay="200">
-                                <div class="font-size-md">{{ __('Your cart is empty!') }}</div>
+                                <div class="font-size-md"><?php echo e(__('Your cart is empty!')); ?></div>
                             </div>
                         </div>
                     </section>
-                    @endif
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
-        @include('footer')
-        @include('script')
+        <?php echo $__env->make('footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php echo $__env->make('script', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <!-- stripe code -->
-        @if(!empty($stripe_publish))
+        <?php if(!empty($stripe_publish)): ?>
         <script src="https://js.stripe.com/v3/"></script>
-        @if($stripe_type == 'intents')
+        <?php if($stripe_type == 'intents'): ?>
         <script type="text/javascript">
         $(function() {
             'use strict';
@@ -621,7 +626,7 @@
 
                 if ($("#opt1-stripe").is(":checked")) {
                     $("#ifYes").show();
-                    var publishable_key = '{{ $stripe_publish_key }}';
+                    var publishable_key = '<?php echo e($stripe_publish_key); ?>';
 
                     // Create a Stripe client.
                     var stripe = Stripe(publishable_key);
@@ -707,7 +712,7 @@
             });
         });
         </script>
-        @else
+        <?php else: ?>
         <script type="text/javascript">
         $(document).ready(function() {
             'use strict';
@@ -721,7 +726,7 @@
 
                     /* stripe code */
 
-                    var stripe = Stripe('{{ $stripe_publish }}');
+                    var stripe = Stripe('<?php echo e($stripe_publish); ?>');
 
                     var elements = stripe.elements();
 
@@ -804,8 +809,8 @@
             });
         });
         </script>
-        @endif
-        @endif
+        <?php endif; ?>
+        <?php endif; ?>
         <script type="text/javascript">
         $(document).ready(function() {
             'use strict';
@@ -899,6 +904,6 @@
     </body>
 
 </html>
-@else
-@include('503')
-@endif
+<?php else: ?>
+<?php echo $__env->make('503', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php endif; ?><?php /**PATH C:\xampp\htdocs\fickrr\resources\views/checkout.blade.php ENDPATH**/ ?>
